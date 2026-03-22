@@ -293,6 +293,7 @@ section.content-section > p {
   to   { opacity:1; transform:translateY(0); }
 }
 
+/* ── Model Section ── */
 .model-section {
   text-align: center;
   padding-left: 80px;
@@ -361,6 +362,7 @@ section.content-section > p {
   height: auto;
 }
 
+/* ── Timeline ── */
 .tl-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(36px, 5vw, 52px);
@@ -542,12 +544,179 @@ section.content-section > p {
   color: #5fa8d3;
 }
 
-/* ── Responsive ── */
-@media(max-width:768px){
-  header { padding:0 24px; }
-  .hero { padding:68px 24px 0; }
-  .card-strips-wrapper { width:70%; }
-  section.content-section { padding:80px 24px; }
-  .social-links { gap: 12px; }
-  .social-btn { padding: 11px 20px; font-size: 13px; }
+/* ══════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* 1 ── Hide the header entirely on mobile */
+  header { display: none; }
+
+  /* 2 ── Hero: strips fall behind text */
+  .hero {
+    padding: 48px 24px 60px;
+    min-height: 100svh;
+    align-items: flex-start;
+  }
+
+  /* Push the text content above the strips */
+  .hero-left {
+    position: relative;
+    z-index: 10;          /* higher than card-strips-wrapper z-index:2 */
+    max-width: 100%;
+  }
+
+  .hero-left p {
+    white-space: normal;  /* allow wrapping on small screens */
+    font-size: 15px;
+  }
+
+  /* Strips stay in place but now sit visually behind the text */
+  .card-strips-wrapper {
+    z-index: 1;           /* below hero-left z-index:10 */
+    opacity: 0.35;        /* dim so text stays readable */
+  }
+
+  /* 3 ── Model section: GIF moves below the text on mobile */
+  .model-section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .model-body {
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .model-left {
+    max-width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* GIF naturally comes after model-left in DOM,
+     so flex-direction:column already puts it below.
+     We just need to reset the top margin. */
+  .model-right {
+    margin-top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .model-gif {
+    max-width: 260px;
+    border-radius: 16px;
+  }
+
+  /* 4 ── Timeline: compact single-column  _-||\ style
+     Left vertical line | entry flows right */
+  .luna-timeline {
+    padding: 48px 20px 48px 20px;
+  }
+
+  .tl-title {
+    font-size: 32px;
+    margin-bottom: 36px;
+  }
+
+  /* Replace the centred dashed line with a left-side line */
+  .tl-items-wrap::before {
+    left: 28px;          /* anchored left */
+    transform: none;
+  }
+
+  /* Reset each item to a horizontal left-aligned row:
+       [letter] | [dot] | [content]
+       like:  L — content
+  */
+  .tl-item {
+    display: grid;
+    grid-template-columns: 44px 24px 1fr;
+    grid-template-rows: auto;
+    align-items: flex-start;
+    margin-bottom: 44px;
+    gap: 0;
+  }
+
+  /* Shared dot repositioning */
+  .tl-dot {
+    position: relative;
+    left: auto;
+    transform: none;
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 8px;
+    justify-self: center;
+  }
+
+  /* ── Left-side items (L, N) ── */
+  .tl-left .tl-letter-side {
+    width: auto;
+    padding: 0;
+    grid-column: 1;
+    grid-row: 1;
+    justify-content: flex-end;
+    padding-right: 4px;
+  }
+  .tl-left .tl-content-side {
+    width: auto;
+    padding: 0 0 0 14px;
+    grid-column: 3;
+    grid-row: 1;
+    text-align: left;
+  }
+
+  /* ── Right-side items (U, A) — mirror to same layout ── */
+  .tl-right {
+    /* override desktop reversed layout */
+    display: grid;
+    grid-template-columns: 44px 24px 1fr;
+  }
+  .tl-right .tl-content-side {
+    width: auto;
+    padding: 0 0 0 14px;
+    text-align: left;
+    grid-column: 3;
+    grid-row: 1;
+    order: 0;
+  }
+  .tl-right .tl-letter-side {
+    width: auto;
+    padding: 0;
+    grid-column: 1;
+    grid-row: 1;
+    justify-content: flex-end;
+    padding-right: 4px;
+    order: 0;
+  }
+
+  /* Compact neon letters */
+  .tl-letter {
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .tl-subtitle {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .tl-para {
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .tl-right .tl-para { margin-left: 0; }
+
+  /* Content section padding */
+  section.content-section {
+    padding: 64px 24px;
+  }
+
+  /* Social buttons */
+  .social-links { gap: 10px; }
+  .social-btn { padding: 11px 18px; font-size: 13px; }
 }
