@@ -1,4 +1,4 @@
-  window.addEventListener('scroll', () => {
+window.addEventListener('scroll', () => {
     document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
   });
 
@@ -76,6 +76,17 @@
   }, { threshold: 0.25 });
   tlItems.forEach(el => tlObserver.observe(el));
 
+  const riseEls = document.querySelectorAll('.custom-rise');
+  const riseObserver = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('rise-visible'), i * 150);
+        riseObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  riseEls.forEach(el => riseObserver.observe(el));
+
   function detectBrowser() {
     const ua = navigator.userAgent;
     if (ua.includes('Firefox')) return { name: 'Firefox', label: 'Add to Firefox' };
@@ -92,3 +103,17 @@
       btn.textContent = browser.label;
     }
   });
+// Image slideshow 1–12 cycling every 1s
+const slideshowEl = document.getElementById('imgSlideshow');
+if (slideshowEl) {
+  const slideshowImgs = [1,2,3,4,5,6,7,8,9,10,11,12];
+  let slideshowIdx = 0;
+  setInterval(() => {
+    slideshowIdx = (slideshowIdx + 1) % slideshowImgs.length;
+    slideshowEl.style.opacity = '0';
+    setTimeout(() => {
+      slideshowEl.src = `assets/${slideshowImgs[slideshowIdx]}.png`;
+      slideshowEl.style.opacity = '1';
+    }, 150);
+  }, 1000);
+}
