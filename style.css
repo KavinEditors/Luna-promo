@@ -293,7 +293,6 @@ section.content-section > p {
   to   { opacity:1; transform:translateY(0); }
 }
 
-/* ── Model Section ── */
 .model-section {
   text-align: center;
   padding-left: 80px;
@@ -307,10 +306,18 @@ section.content-section > p {
 
 .model-body {
   display: flex;
-  align-items: flex-start;
-  gap: 24px;
-  text-align: left;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+.model-body > .model-subtitle {
+  margin-bottom: 0;
+}
+.typewriter-block {
+  max-width: 860px;
+  width: 100%;
+  text-align: center;
 }
 .model-left {
   flex: 1;
@@ -332,10 +339,11 @@ section.content-section > p {
 }
 .typewriter-para {
   font-size: 17px;
-  line-height: 1.5;
+  line-height: 1.85;
   color: var(--text-muted);
-  margin: 0;
+  margin: 0 auto;
   min-height: 2em;
+  display: inline;
 }
 .typewriter-cursor {
   display: inline;
@@ -350,19 +358,150 @@ section.content-section > p {
 
 .model-right {
   flex-shrink: 0;
-  margin-top: 48px;
+  margin-top: 8px;
 }
 
 .model-gif-wrap {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 .model-gif {
   display: block;
-  max-width: 100%;
+  max-width: 560px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 40px rgba(123,97,255,0.2);
+}
+
+/* ── Rise animation ── */
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.custom-rise {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.custom-rise.rise-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Customisation Block ── */
+.custom-block {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 60px 0 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.custom-text {
+  flex: 1;
+  min-width: 0;
+}
+.custom-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 22px;
+  background: linear-gradient(135deg, #fff 40%, #a89fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.custom-para {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+.custom-gif-wrap {
+  flex-shrink: 0;
+  width: 340px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 40px rgba(123,97,255,0.18);
+}
+.custom-gif {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Settings Block ── */
+.settings-block {
+  text-align: center;
+  padding: 0 0 80px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.settings-label {
+  display: block;
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.settings-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Image slideshow */
+.settings-media-row {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.settings-gif-wrap {
+  flex: 1;
+  min-width: 220px;
+  max-width: 480px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 40px rgba(123,97,255,0.15);
+}
+.settings-gif {
+  display: block;
+  width: 100%;
   height: auto;
 }
 
-/* ── Timeline ── */
+.img-slideshow-wrap {
+  flex: 1;
+  min-width: 220px;
+  max-width: 480px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 40px rgba(123,97,255,0.15);
+  background: rgba(0,0,0,0.3);
+  aspect-ratio: 16/10;
+}
+.img-slideshow {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+
 .tl-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(36px, 5vw, 52px);
@@ -544,179 +683,37 @@ section.content-section > p {
   color: #5fa8d3;
 }
 
-/* ══════════════════════════════════════════
-   MOBILE  (≤ 768px)
-   ══════════════════════════════════════════ */
-@media (max-width: 768px) {
-
-  /* 1 ── Hide the header entirely on mobile */
-  header { display: none; }
-
-  /* 2 ── Hero: strips fall behind text */
+/* ── Responsive ── */
+@media(max-width:768px){
+  header { padding:0 24px; }
   .hero {
-    padding: 48px 24px 60px;
-    min-height: 100svh;
-    align-items: flex-start;
-  }
-
-  /* Push the text content above the strips */
-  .hero-left {
-    position: relative;
-    z-index: 10;          /* higher than card-strips-wrapper z-index:2 */
-    max-width: 100%;
-  }
-
-  .hero-left p {
-    white-space: normal;  /* allow wrapping on small screens */
-    font-size: 15px;
-  }
-
-  /* Strips stay in place but now sit visually behind the text */
-  .card-strips-wrapper {
-    z-index: 1;           /* below hero-left z-index:10 */
-    opacity: 0.35;        /* dim so text stays readable */
-  }
-
-  /* 3 ── Model section: GIF moves below the text on mobile */
-  .model-section {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .model-body {
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-  }
-
-  .model-left {
-    max-width: 100%;
-    margin-left: 0;
-    text-align: center;
-  }
-
-  /* GIF naturally comes after model-left in DOM,
-     so flex-direction:column already puts it below.
-     We just need to reset the top margin. */
-  .model-right {
-    margin-top: 0;
-    width: 100%;
-    display: flex;
+    padding:68px 24px 0;
     justify-content: center;
   }
-
-  .model-gif {
-    max-width: 260px;
-    border-radius: 16px;
+  .hero-left {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
-  /* 4 ── Timeline: compact single-column  _-||\ style
-     Left vertical line | entry flows right */
-  .luna-timeline {
-    padding: 48px 20px 48px 20px;
+  .hero-left p {
+    white-space: normal;
   }
-
-  .tl-title {
-    font-size: 32px;
-    margin-bottom: 36px;
+  .cta-group {
+    justify-content: center;
   }
-
-  /* Replace the centred dashed line with a left-side line */
-  .tl-items-wrap::before {
-    left: 28px;          /* anchored left */
-    transform: none;
+  .system-status {
+    justify-content: center;
   }
-
-  /* Reset each item to a horizontal left-aligned row:
-       [letter] | [dot] | [content]
-       like:  L — content
-  */
-  .tl-item {
-    display: grid;
-    grid-template-columns: 44px 24px 1fr;
-    grid-template-rows: auto;
-    align-items: flex-start;
-    margin-bottom: 44px;
-    gap: 0;
+  .card-strips-wrapper { width:70%; }
+  section.content-section { padding:80px 24px; }
+  .social-links { gap: 12px; }
+  .social-btn { padding: 11px 20px; font-size: 13px; }
+  .custom-block {
+    flex-direction: column;
+    gap: 36px;
+    padding: 40px 0 60px;
   }
-
-  /* Shared dot repositioning */
-  .tl-dot {
-    position: relative;
-    left: auto;
-    transform: none;
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 8px;
-    justify-self: center;
-  }
-
-  /* ── Left-side items (L, N) ── */
-  .tl-left .tl-letter-side {
-    width: auto;
-    padding: 0;
-    grid-column: 1;
-    grid-row: 1;
-    justify-content: flex-end;
-    padding-right: 4px;
-  }
-  .tl-left .tl-content-side {
-    width: auto;
-    padding: 0 0 0 14px;
-    grid-column: 3;
-    grid-row: 1;
-    text-align: left;
-  }
-
-  /* ── Right-side items (U, A) — mirror to same layout ── */
-  .tl-right {
-    /* override desktop reversed layout */
-    display: grid;
-    grid-template-columns: 44px 24px 1fr;
-  }
-  .tl-right .tl-content-side {
-    width: auto;
-    padding: 0 0 0 14px;
-    text-align: left;
-    grid-column: 3;
-    grid-row: 1;
-    order: 0;
-  }
-  .tl-right .tl-letter-side {
-    width: auto;
-    padding: 0;
-    grid-column: 1;
-    grid-row: 1;
-    justify-content: flex-end;
-    padding-right: 4px;
-    order: 0;
-  }
-
-  /* Compact neon letters */
-  .tl-letter {
-    font-size: 40px;
-    letter-spacing: -1px;
-  }
-
-  .tl-subtitle {
-    font-size: 16px;
-    margin-bottom: 6px;
-  }
-
-  .tl-para {
-    font-size: 13px;
-    line-height: 1.6;
-    max-width: 100%;
-  }
-
-  .tl-right .tl-para { margin-left: 0; }
-
-  /* Content section padding */
-  section.content-section {
-    padding: 64px 24px;
-  }
-
-  /* Social buttons */
-  .social-links { gap: 10px; }
-  .social-btn { padding: 11px 18px; font-size: 13px; }
+  .custom-gif-wrap { width: 100%; }
+  .settings-gif-wrap { max-width: 100%; }
 }
