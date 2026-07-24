@@ -1,1 +1,2 @@
 # Luna-promo
+LUNA is a super-fast, fully customizable AI browser sidekick built to change how you surf the web. It lives right inside your browser to instantly read webpages, summarize PDFs, read charts, and even help you solve tough math equations in real-time. The coolest part is that you can completely change its "looks" with custom colors and fonts, and even swap out its AI "brain" depending on whether you need a quick answer or deep reasoning.
